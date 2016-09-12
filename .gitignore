@@ -1,6 +1,8 @@
 .git
 *.uvgui.*
 *.uvopt
+*.uvguix.*
+*.uvoptx
 Listings
 Objects
 DebugConfig
