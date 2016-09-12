@@ -1,0 +1,6 @@
+.git
+*.uvgui.*
+*.uvopt
+Listings
+Objects
+DebugConfig
