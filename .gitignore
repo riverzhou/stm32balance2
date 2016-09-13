@@ -3,6 +3,7 @@
 *.uvopt
 *.uvguix.*
 *.uvoptx
+*.TMP
 Listings
 Objects
 DebugConfig
