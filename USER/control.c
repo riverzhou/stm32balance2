@@ -52,11 +52,10 @@ void control_Init(void)
 	EXTI_InitStructure.EXTI_LineCmd = ENABLE;
 	EXTI_Init(&EXTI_InitStructure);	 															//根据EXTI_InitStruct中指定的参数初始化外设EXTI寄存器
 	
-	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);								//设置分组2
 	memset(&NVIC_InitStructure,0,sizeof(NVIC_InitStructure));
 	NVIC_InitStructure.NVIC_IRQChannel 	= EXTI9_5_IRQn;						//使能按键所在的外部中断通道
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x02;	//抢占优先级2， 
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x01;					//子优先级1
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2;			//抢占优先级2
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;						//子优先级1
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;								//使能外部中断通道
 	NVIC_Init(&NVIC_InitStructure); 	
 }

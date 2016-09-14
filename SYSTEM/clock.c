@@ -9,8 +9,7 @@ void SysTick_Handler(void) {
 
 void clock_Init(void)
 {
-	SysTick_Config(SystemCoreClock/1000);   			// SysTick 1 msec interrupts
-	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);		// 设置分组0
+	SysTick_Config(SystemCoreClock/1000);   		// SysTick 1 msec interrupts
 	NVIC_SetPriority (SysTick_IRQn, 0);					// 把时钟优先级设到最高
 }
 

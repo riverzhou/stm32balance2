@@ -37,6 +37,17 @@ void main_Init(void)
 	ENV->enc_filte		= 800;			// 编码滤波		// 放大1000倍
 }
 
+/*
+SysTick_IRQn	0:0
+EXTI9_5_IRQn	2:1
+USART1_IRQn		3:0
+USART3_IRQn		3:1
+*/
+void nvic_init(void)
+{
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_3); // 配置中断模式为3:1 (0-7:0-1)
+}
+
 void second(void)
 {
 	static volatile unsigned int count = 0;
@@ -78,6 +89,7 @@ int main(void)
 {
 	main_Init();
 	command_init();
+	nvic_init();									//=====初始化中断模式
 	clock_Init();                 //=====初始化软时钟
 	usart_Init();									//=====初始化串口
 	LED_Init();										//=====初始化LED
