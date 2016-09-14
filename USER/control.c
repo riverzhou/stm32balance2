@@ -55,7 +55,7 @@ void control_Init(void)
 	memset(&NVIC_InitStructure,0,sizeof(NVIC_InitStructure));
 	NVIC_InitStructure.NVIC_IRQChannel 	= EXTI9_5_IRQn;						//使能按键所在的外部中断通道
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2;			//抢占优先级2
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;						//子优先级1
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;						//子优先级0
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;								//使能外部中断通道
 	NVIC_Init(&NVIC_InitStructure); 	
 }
@@ -131,6 +131,7 @@ int EXTI9_5_IRQHandler(void)
 	static int Flag_Target = 0;
 	if(EXTI_GetITStatus(EXTI_Line5) != RESET){
 		EXTI_ClearFlag(EXTI_Line5);																					//清除LINE5上的中断标志位   
+		return 0;
 		
 		float Bal_Angle=0.0f, Bal_Gyro=0.0f, Turn_Gyro=0.0f;								//平衡倾角 平衡陀螺仪 转向陀螺仪
 		Get_Angle(&Bal_Angle, &Bal_Gyro, &Turn_Gyro);                       //===更新姿态	

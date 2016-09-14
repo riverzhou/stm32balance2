@@ -14,7 +14,7 @@
 #include "command.h"
 
 struct env_t g_env;
-struct env_t* ENV = &g_env;
+struct env_t *ENV = &g_env;
 
 #ifdef USE_FULL_ASSERT
 void assert_failed(uint8_t* file, uint32_t line)
@@ -39,9 +39,9 @@ void main_Init(void)
 
 /*
 SysTick_IRQn	0:0
-EXTI9_5_IRQn	2:1
+EXTI9_5_IRQn	2:0
 USART1_IRQn		3:0
-USART3_IRQn		3:1
+USART3_IRQn		4:0
 */
 void nvic_init(void)
 {

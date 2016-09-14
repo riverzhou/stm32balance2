@@ -9,18 +9,19 @@
 返回  值：无
 **************************************************************************/
 
-
 struct usart_buff_t usart_buff;
-struct usart_buff_t *CMD=&usart_buff;
+struct usart_buff_t *CMD = &usart_buff;
 
 void command_proc(unsigned char data)
 {	
+	CMD->index += 1;
+	CMD->index %= CMDLEN;
 	CMD->buff[CMD->index] = data;
-	CMD->index = (CMD->index+1)%CMDLEN;
+	printf("\r\ncommand_proc %d \r\n", data);
 } 
 
 void command_init(void)
 {
-	memset(CMD,0,sizeof(struct usart_buff_t));
+	memset(CMD, 0, sizeof(struct usart_buff_t));
 }
 
