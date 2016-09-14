@@ -131,7 +131,6 @@ int EXTI9_5_IRQHandler(void)
 	static int Flag_Target = 0;
 	if(EXTI_GetITStatus(EXTI_Line5) != RESET){
 		EXTI_ClearFlag(EXTI_Line5);																					//清除LINE5上的中断标志位   
-		return 0;
 		
 		float Bal_Angle=0.0f, Bal_Gyro=0.0f, Turn_Gyro=0.0f;								//平衡倾角 平衡陀螺仪 转向陀螺仪
 		Get_Angle(&Bal_Angle, &Bal_Gyro, &Turn_Gyro);                       //===更新姿态	
@@ -148,7 +147,7 @@ int EXTI9_5_IRQHandler(void)
 		int Motor2 = Balance_Pwm - Velocity_Pwm;                            //===计算右轮电机最终PWM
 
 		if(!Turn_Off(Bal_Angle, BAL_VOLTAGE))                   					  //===检测倾角是否在许可范围内
-			Set_Pwm(Motor1, Motor2);                                          //===赋值给PWM寄存器  
+			;//Set_Pwm(Motor1, Motor2);                                          //===赋值给PWM寄存器  
 
 		MPU_BAL_ANGLE = (int)(Bal_Angle*1000);
 		MPU_BAL_GYRO 	= (int)(Bal_Gyro*1000);

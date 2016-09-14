@@ -63,7 +63,8 @@ mpu_t_g %-8d , \
 enc_l %-8d , \
 enc_r %-8d , \
 mot_l %-8d , \
-mot_r %-8d \
+mot_r %-8d , \
+bat_v	%-8d \
 \r\n", 
 SYS_ClockTick, 
 ENV->mpu_count,
@@ -73,7 +74,8 @@ ENV->mpu_turn_gypo,
 ENV->enc_left,
 ENV->enc_right,
 ENV->moto_left,
-ENV->moto_right
+ENV->moto_right,
+ENV->bat_voltage
 );
 
 			for(int i=0; i<CMDLEN; i++){
