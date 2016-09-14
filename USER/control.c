@@ -147,7 +147,7 @@ int EXTI9_5_IRQHandler(void)
 		int Motor2 = Balance_Pwm - Velocity_Pwm;                            //===计算右轮电机最终PWM
 
 		if(!Turn_Off(Bal_Angle, BAL_VOLTAGE))                   					  //===检测倾角是否在许可范围内
-			;//Set_Pwm(Motor1, Motor2);                                          //===赋值给PWM寄存器  
+			Set_Pwm(Motor1, Motor2);                                          //===赋值给PWM寄存器  
 
 		MPU_BAL_ANGLE = (int)(Bal_Angle*1000);
 		MPU_BAL_GYRO 	= (int)(Bal_Gyro*1000);

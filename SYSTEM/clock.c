@@ -13,11 +13,12 @@ void clock_Init(void)
 	NVIC_SetPriority (SysTick_IRQn, 0);					// 把时钟优先级设到最高
 }
 
+
 //延时nus
 //nus为要延时的us数.		    								   
 void delay_us(u32 nus)
 {	
-	u32 n = nus<<4;										// 粗略认为16个循环是 1 us
+	u32 n = nus<<4;															// 粗略认为16个循环是 1 us
 	while(n--);
 }
 
