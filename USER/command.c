@@ -23,5 +23,6 @@ void command_proc(unsigned char data)
 void command_init(void)
 {
 	memset(CMD, 0, sizeof(struct usart_buff_t));
+	CMD->index = CMDLEN-1;
 }
 

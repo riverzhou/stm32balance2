@@ -1,7 +1,11 @@
 #include "stm32f10x.h"
 #include "clock.h"
 
-unsigned int SYS_ClockTick = 0;
+/*
+	！！！此文件必须独立设置为 O0 优化！！！
+*/
+
+volatile unsigned int SYS_ClockTick = 0;
 
 void SysTick_Handler(void) {
 	SYS_ClockTick++;
@@ -19,7 +23,7 @@ void clock_Init(void)
 void delay_us(u32 nus)
 {	
 	u32 n = nus<<4;										// 粗略认为16个循环是 1 us
-	while(n--) __NOP();
+	while(n) n--;
 }
 
 //延时nms

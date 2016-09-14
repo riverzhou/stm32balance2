@@ -7,6 +7,6 @@ void delay_ms(unsigned int nms);
 void delay_us(unsigned int nus);
 unsigned int get_ms(unsigned long *count);
 
-extern unsigned int SYS_ClockTick;
+extern volatile unsigned int SYS_ClockTick;
 
 #endif

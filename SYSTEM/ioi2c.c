@@ -134,7 +134,7 @@ void IIC_Send_Byte(u8 txd)
 *函数原型:			int i2c_write(uint8_t addr, uint8_t reg, uint8_t data)
 *功　　能:		
 *******************************************************************************/
-int i2c_write(uint8_t addr, uint8_t reg, uint8_t len, uint8_t *data)
+int i2c_write(u8 addr, u8 reg, u8 len, u8 *data)
 {
 	int i;
 	if (!IIC_Start())
@@ -160,7 +160,7 @@ int i2c_write(uint8_t addr, uint8_t reg, uint8_t len, uint8_t *data)
 *函数原型:			int i2c_read(uint8_t addr, uint8_t reg, uint8_t data)
 *功　　能:		
 *******************************************************************************/
-int i2c_read(uint8_t addr, uint8_t reg, uint8_t len, uint8_t *buf)
+int i2c_read(u8 addr, u8 reg, u8 len, u8 *buf)
 {
 	if (!IIC_Start())
 		return 1;
@@ -191,7 +191,7 @@ int i2c_read(uint8_t addr, uint8_t reg, uint8_t len, uint8_t *buf)
 *函数原型:		u8 IIC_Read_Byte(unsigned char ack)
 *功　　能:	  	//读1个字节，ack=1时，发送ACK，ack=0，发送nACK 
 *******************************************************************************/  
-u8 IIC_Read_Byte(unsigned char ack)
+u8 IIC_Read_Byte(u8 ack)
 {
 	unsigned char i,receive=0;
 	SDA_IN();//SDA设置为输入
@@ -217,7 +217,7 @@ u8 IIC_Read_Byte(unsigned char ack)
 			addr	寄存器地址
 返回   读出来的值
 *******************************************************************************/ 
-unsigned char I2C_ReadOneByte(unsigned char I2C_Addr,unsigned char addr)
+unsigned char I2C_ReadOneByte(u8 I2C_Addr,u8 addr)
 {
 	unsigned char res=0;
 	IIC_Start();	
@@ -312,7 +312,7 @@ u8 IICreadByte(u8 dev, u8 reg, u8 *data)
 		data  	将要写入的字节
 返回   1
 *******************************************************************************/ 
-unsigned char IICwriteByte(unsigned char dev, unsigned char reg, unsigned char data)
+unsigned char IICwriteByte(u8 dev, u8 reg, u8 data)
 {
 	return IICwriteBytes(dev, reg, 1, &data);
 }
