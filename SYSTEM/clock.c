@@ -9,7 +9,7 @@ void SysTick_Handler(void) {
 
 void clock_Init(void)
 {
-	SysTick_Config(SystemCoreClock/1000);   		// SysTick 1 msec interrupts
+	SysTick_Config(SystemCoreClock/1000);   			// SysTick 1 msec interrupts
 	NVIC_SetPriority (SysTick_IRQn, 0);					// 把时钟优先级设到最高
 }
 
@@ -18,8 +18,8 @@ void clock_Init(void)
 //nus为要延时的us数.		    								   
 void delay_us(u32 nus)
 {	
-	u32 n = nus<<4;															// 粗略认为16个循环是 1 us
-	while(n--);
+	u32 n = nus<<4;										// 粗略认为16个循环是 1 us
+	while(n--) __NOP();
 }
 
 //延时nms
@@ -30,7 +30,7 @@ void delay_ms(u32 nms)
 	int time;
 	while(1){
 		time = SYS_ClockTick - start;
-		if(time < 0) 		time += 0xFFFFFFFF;
+		if(time < 0) 	time += 0xFFFFFFFF;
 		if(time >= nms)	return;
 	}
 } 
