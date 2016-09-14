@@ -17,7 +17,7 @@ void clock_Init(void)
 //nus为要延时的us数.		    								   
 void delay_us(u32 nus)
 {	
-	u32 n = nus<<5;										// 粗略认为32个循环是 1 us
+	u32 n = nus<<4;										// 粗略认为16个循环是 1 us
 	while(n--);
 }
 
