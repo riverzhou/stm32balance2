@@ -1,5 +1,6 @@
 #include "stm32f10x.h"
 #include "battery.h"
+#include "main.h"
 
 /**************************************************************************
 函数功能：ACD初始化电池电压检测
@@ -36,6 +37,8 @@ void  Battery_Init(void)
 	while(ADC_GetResetCalibrationStatus(ADC1));		//等待复位校准结束	
 	ADC_StartCalibration(ADC1);	 									//开启AD校准
 	while(ADC_GetCalibrationStatus(ADC1));	 			//等待校准结束
+
+	ENV->bat_voltage = Get_battery_volt();
 }		
 
 /**************************************************************************
