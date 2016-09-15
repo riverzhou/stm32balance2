@@ -30,7 +30,8 @@ void usart1_Init(void)
 	USART_InitTypeDef USART_InitStructure;
 	NVIC_InitTypeDef  NVIC_InitStructure;
 
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA|RCC_APB2Periph_USART1,  ENABLE);		//使能UGPIOA USART1 时钟
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);				//使能UGPIOA 时钟
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1,ENABLE);				//使能USART1 时钟
 	
 	//USART1_TX
 	GPIO_StructInit(&GPIO_InitStructure);
@@ -107,7 +108,8 @@ void usart3_Init(void)
 	USART_InitTypeDef USART_InitStructure;
 	NVIC_InitTypeDef 	NVIC_InitStructure;
 	 
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB|RCC_APB1Periph_USART3,  ENABLE);		//使能UGPIOB USART3时钟
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB,  ENABLE);			//使能UGPIOB时钟
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);			//使能USART3时钟
 	
 	//USART3_TX
 	GPIO_StructInit(&GPIO_InitStructure);

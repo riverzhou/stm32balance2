@@ -77,13 +77,15 @@ ENV->moto_left,
 ENV->moto_right,
 ENV->bat_voltage
 );
-
+/*
 			for(int i=0; i<CMDLEN; i++){
 				printf("%2X ", CMD->buff[i]);
 			}
 			printf("\t[P]%2u\r\n", CMD->index);
 			
 			ENV->bat_voltage = Get_battery_volt();
+*/
+//	usart3_PutChar(0x66);
 	}	
 }
 
@@ -101,7 +103,7 @@ int main(void)
 	IIC_Init();                   //=====初始化模拟IIC
 	DMP_Init();                   //=====初始化DMP
 	control_Init();								//=====初始化控制中断，5ms
-	
+
 	printf("hello world \r\n");
 
 	while(1)
