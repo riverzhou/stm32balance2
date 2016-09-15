@@ -17,7 +17,7 @@ void command_proc(unsigned char data)
 	CMD->index += 1;
 	CMD->index %= CMDLEN;
 	CMD->buff[CMD->index] = data;
-	printf("\r\ncommand_proc %d \r\n", data);
+	//printf("\r\ncommand_proc %d \r\n", data);
 } 
 
 void command_init(void)

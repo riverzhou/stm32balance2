@@ -79,9 +79,9 @@ ENV->bat_voltage
 );
 
 			for(int i=0; i<CMDLEN; i++){
-				printf("%2X ", CMD->buff[i]);
+				printf("%.2X ", CMD->buff[i]);
 			}
-			printf("\t[P]%2u\r\n", CMD->index);
+			printf("[P]%2u\r\n", CMD->index);
 			
 			ENV->bat_voltage = Get_battery_volt();
 
@@ -93,16 +93,16 @@ int main(void)
 {
 	main_Init();
 	command_init();
-	nvic_init();									//=====初始化中断模式
-	clock_Init();                 //=====初始化软时钟
-	usart_Init();									//=====初始化串口
-	LED_Init();										//=====初始化LED
-	Battery_Init();								//=====初始电池电压监控
-	Encoder_Init();            		//=====初始化电机编码器接口
-	Motor_Init();   							//=====初始化驱动电机
-	IIC_Init();                   //=====初始化模拟IIC
-	DMP_Init();                   //=====初始化DMP
-	control_Init();								//=====初始化控制中断，5ms
+	nvic_init();		//=====初始化中断模式
+	clock_Init();		//=====初始化软时钟
+	usart_Init();		//=====初始化串口
+	Battery_Init();	//=====初始电池电压监控
+	Encoder_Init();	//=====初始化电机编码器接口
+	Motor_Init();		//=====初始化驱动电机
+	IIC_Init();			//=====初始化模拟IIC
+	DMP_Init();			//=====初始化DMP
+	control_Init();	//=====初始化控制中断，5ms
+	LED_Init();			//=====初始化LED
 
 	printf("hello world \r\n");
 

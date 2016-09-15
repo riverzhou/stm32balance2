@@ -2,6 +2,7 @@
 #include "stm32f10x.h"
 #include "usart.h"
 #include "command.h"
+#include "clock.h"
 
 
 /**************************************************************************
@@ -12,7 +13,7 @@
 
 void USART1_IRQHandler(void)
 {	
-	if(USART1->SR&(1<<5)){		//接收到数据
+	if(USART_GetITStatus(USART1, USART_IT_RXNE) != RESET){			//接收到数据
 		command_proc(USART_ReceiveData(USART1));
 	}  
 } 
@@ -94,7 +95,7 @@ int usart1_GetChar (void) {
 **************************************************************************/
 void USART3_IRQHandler(void)
 {	
-	if(USART3->SR&(1<<5)){		//接收到数据
+	if(USART_GetITStatus(USART3, USART_IT_RXNE) != RESET){			//接收到数据
 		command_proc(USART_ReceiveData(USART3));
 	}  
 } 
