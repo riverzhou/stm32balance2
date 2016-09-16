@@ -48,6 +48,32 @@ void nvic_init(void)
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_3); // 配置中断模式为3:1 (0-7:0-1)
 }
 
+void output_env(void)
+{
+	unsigned char buff[sizeof(struct env_buff_t)] = {0};
+	struct env_buff_t* buff_p = (struct env_buff_t*)buff;
+	
+	if(ENV->env_lock)		//===如果环境变量区被锁住则不处理命令（打断了低级别的锁）
+		return;
+	ENV->env_lock = 1;	// 锁住环变量境区
+	
+	memcpy(&(buff_p->env),ENV,sizeof(struct env_t));
+	ENV->env_lock = 0;	// 解锁环变量境区
+
+	buff_p->head =	0xff;
+	buff_p->len  = sizeof(struct env_buff_t);
+	buff_p->alen = ~buff_p->len;
+	
+	int sum=0;
+	for(int i=0;i<sizeof(struct env_buff_t)-2;i++){
+		sum += buff[i];
+	}
+	buff_p->sum = sum;
+	
+	for(int i=0;i<sizeof(struct env_buff_t);i++)
+		usart_PutChar(buff[i]);
+}
+
 void second(void)
 {
 	static volatile unsigned int count = 0;
@@ -55,50 +81,8 @@ void second(void)
 			count += 1000;
 			ENV->bat_voltage = Get_battery_volt();
 
-			printf("\
-SYS_C %-8u , \
-mpu_c %-8u , \
-bal_a %-8d , \
-bal_p %-8d , \
-bal_d %-8d , \
-vel_p %-8d , \
-vel_i %-8d , \
-enc_f	%-8d , \
-mpu_b_a %-8d , \
-mpu_b_g %-8d , \
-mpu_t_g %-8d , \
-enc_l %-8d , \
-enc_r %-8d , \
-mot_l %-8d , \
-mot_r %-8d , \
-bat_v	%-8d \
-\r\n", 
-SYS_ClockTick, 
-ENV->mpu_count,
-ENV->bal_angle,
-ENV->bal_kp,
-ENV->bal_kd,
-ENV->vel_kp,
-ENV->vel_ki,
-ENV->enc_filte,
-ENV->mpu_bal_angle,
-ENV->mpu_bal_gypo,
-ENV->mpu_turn_gypo,
-ENV->enc_left,
-ENV->enc_right,
-ENV->moto_left,
-ENV->moto_right,
-ENV->bat_voltage
-);
-
-/*
-			for(int i=0; i<CMDLEN; i++){
-				printf("%.2X ", CMD_RAW->buff[i]);
-			}
-			printf("[P]%2u\r\n", CMD_RAW->index);
-*/
-
-//		usart3_PutChar(0x66);
+			output_env();
+		
 	}	
 }
 

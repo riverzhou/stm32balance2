@@ -139,9 +139,10 @@ int EXTI9_5_IRQHandler(void)
 		if(Flag_Target==1)                                                  //5ms读取一次陀螺仪和加速度计的值，更高的采样频率可以改善卡尔曼滤波和互补滤波的效果
 			return 0;	                                               
 
-		if(ENV->env_lock)																										//===如果环境变量区被锁住则不做电机控制
+		if(ENV->env_lock)																										//===如果环境变量区被锁住则不处理命令（打断了低级别的锁）
 			return 0;
-
+		ENV->env_lock = 1;																									//===锁住环境变量区
+		
 		int Encoder_Left  = -Read_Encoder(2);                               //===读取编码器的值，因为两个电机的旋转了180度的，所以对其中一个取反，保证输出极性一致
 		int Encoder_Right = Read_Encoder(4);                                //===读取编码器的值
 		int Balance_Pwm   = balance(Bal_Angle, Bal_Gyro);                		//===平衡PID控制	
@@ -159,6 +160,8 @@ int EXTI9_5_IRQHandler(void)
 		ENC_RIGHT			=	Encoder_Right;
 		MOTO_LEFT			=	Motor1;
 		MOTO_RIGHT		=	Motor2;
+		
+		ENV->env_lock = 0;																									//解锁环境变量区
 	}       	
 	return 0;	  
 } 

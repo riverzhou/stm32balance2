@@ -24,6 +24,14 @@ struct env_t{
 	int cmd_right;
 };
 
+struct env_buff_t{
+	unsigned short head;
+	unsigned short len;
+	struct env_t env;
+	unsigned short alen;
+	unsigned short sum;
+};
+
 extern struct env_t* ENV;
 
 #endif

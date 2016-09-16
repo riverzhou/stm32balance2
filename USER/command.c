@@ -38,6 +38,8 @@ int cmd_proc(unsigned char * buff)
 	if(cmd_p->sum != sum)
 		return -1;
 
+	if(ENV->env_lock)		//===如果环境变量区被锁住则不处理命令（打断了低级别的锁）
+		return 0;
 	ENV->env_lock = 1;	// 锁住环变量境区
 
 	if(cmd_p->bal_angle !=0)
