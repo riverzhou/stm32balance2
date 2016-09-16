@@ -58,6 +58,12 @@ void second(void)
 			printf("\
 SYS_C %-8u , \
 mpu_c %-8u , \
+bal_a %-8d , \
+bal_p %-8d , \
+bal_d %-8d , \
+vel_p %-8d , \
+vel_i %-8d , \
+enc_f	%-8d , \
 mpu_b_a %-8d , \
 mpu_b_g %-8d , \
 mpu_t_g %-8d , \
@@ -69,6 +75,12 @@ bat_v	%-8d \
 \r\n", 
 SYS_ClockTick, 
 ENV->mpu_count,
+ENV->bal_angle,
+ENV->bal_kp,
+ENV->bal_kd,
+ENV->vel_kp,
+ENV->vel_ki,
+ENV->enc_filte,
 ENV->mpu_bal_angle,
 ENV->mpu_bal_gypo,
 ENV->mpu_turn_gypo,
