@@ -88,10 +88,10 @@ void Get_Angle(float* Bal_Angle, float* Bal_Gyro, float* Turn_Gyro)
 **************************************************************************/
 int balance(float Angle, float Gyro)
 { 
-	float BAL_ANGEL = (float)ENV->bal_angel/1000;
+	float BAL_ANGLE = (float)ENV->bal_angle/1000;
 	float BAL_KP		=	(float)ENV->bal_kp;
 	float BAL_KD		= (float)ENV->bal_kd/1000;
-	return (Angle - BAL_ANGEL) * BAL_KP + Gyro * BAL_KD;
+	return (Angle - BAL_ANGLE) * BAL_KP + Gyro * BAL_KD;
   //===求出平衡的角度中值 和机械相关
 	//===计算平衡控制的电机PWM  PD控制
 }
@@ -138,7 +138,10 @@ int EXTI9_5_IRQHandler(void)
 		Flag_Target=!Flag_Target;
 		if(Flag_Target==1)                                                  //5ms读取一次陀螺仪和加速度计的值，更高的采样频率可以改善卡尔曼滤波和互补滤波的效果
 			return 0;	                                               
-		
+
+		if(ENV->env_lock)																										//===如果环境变量区被锁住则不做电机控制
+			return 0;
+
 		int Encoder_Left  = -Read_Encoder(2);                               //===读取编码器的值，因为两个电机的旋转了180度的，所以对其中一个取反，保证输出极性一致
 		int Encoder_Right = Read_Encoder(4);                                //===读取编码器的值
 		int Balance_Pwm   = balance(Bal_Angle, Bal_Gyro);                		//===平衡PID控制	

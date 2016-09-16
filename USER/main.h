@@ -4,7 +4,7 @@
 struct env_t{
 	int env_lock;
 	int bat_voltage;
-	int bal_angel;
+	int bal_angle;
 	int bal_kp;
 	int bal_kd;
 	int vel_kp;

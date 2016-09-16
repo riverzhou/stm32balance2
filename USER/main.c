@@ -27,9 +27,9 @@ void assert_failed(uint8_t* file, uint32_t line)
 void main_Init(void)
 {
 	memset(ENV, 0, sizeof(struct env_t));
-	
+
 	ENV->env_lock			= 0;				// 全局变量锁
-	ENV->bal_angel		= 0;				// 平衡中值 	// 放大1000倍
+	ENV->bal_angle		= 0;				// 平衡中值 	// 放大1000倍
 	ENV->bal_kp				= 300;			// 平衡KP
 	ENV->bal_kd				= 1000;			// 平衡KD  		// 放大1000倍
 	ENV->vel_kp				= 80;				// 速度KP
@@ -53,6 +53,7 @@ void second(void)
 	static volatile unsigned int count = 0;
 	if(SYS_ClockTick >= count){
 			count += 1000;
+			ENV->bat_voltage = Get_battery_volt();
 
 			printf("\
 SYS_C %-8u , \
@@ -78,14 +79,14 @@ ENV->moto_right,
 ENV->bat_voltage
 );
 
+/*
 			for(int i=0; i<CMDLEN; i++){
-				printf("%.2X ", CMD->buff[i]);
+				printf("%.2X ", CMD_RAW->buff[i]);
 			}
-			printf("[P]%2u\r\n", CMD->index);
-			
-			ENV->bat_voltage = Get_battery_volt();
+			printf("[P]%2u\r\n", CMD_RAW->index);
+*/
 
-//	usart3_PutChar(0x66);
+//		usart3_PutChar(0x66);
 	}	
 }
 
