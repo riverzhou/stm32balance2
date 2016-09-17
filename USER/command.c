@@ -29,7 +29,7 @@ int cmd_proc(unsigned char * buff)
 {
 	struct cmd_buff_t *cmd_p = (struct cmd_buff_t*)buff;
 
-	if(cmd_p->head != 0xff || cmd_p->len != CMDLEN || cmd_p->alen != ~cmd_p->len)
+	if(cmd_p->head != 0xff || cmd_p->len != CMDLEN || (cmd_p->alen & cmd_p->len))
 		return -1;
 
 	int sum = 0;
