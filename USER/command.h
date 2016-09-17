@@ -2,7 +2,7 @@
 #define _COMMAND_H_
 
 extern void command_proc(unsigned char data);
-extern void command_init(void);
+extern void command_buff_reset(void);
 
 struct cmd_buff_t{
 	unsigned short head;

@@ -59,6 +59,8 @@ int cmd_proc(unsigned char * buff)
 
 	ENV->env_lock = 0;	// 解锁环境变量区
 
+	command_buff_reset();
+	
 	return 0;
 }
 
@@ -71,7 +73,7 @@ void command_proc(unsigned char data)
 	cmd_proc(&(CMD_RAW->buff[CMD_RAW->index+1]));
 } 
 
-void command_init(void)
+void command_buff_reset(void)
 {
 	memset(CMD_RAW, 0, sizeof(struct usart_buff_t));
 	CMD_RAW->index = CMDLEN-1;

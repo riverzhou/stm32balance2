@@ -60,7 +60,7 @@ void output_env(void)
 	memcpy(&(buff_p->env),ENV,sizeof(struct env_t));
 	ENV->env_lock = 0;	// 解锁环变量境区
 
-	buff_p->head =	0xff;
+	buff_p->head = 0xff;
 	buff_p->len  = sizeof(struct env_buff_t);
 	buff_p->alen = ~buff_p->len;
 	
@@ -79,17 +79,15 @@ void second(void)
 	static volatile unsigned int count = 0;
 	if(SYS_ClockTick >= count){
 			count += 1000;
-			ENV->bat_voltage = Get_battery_volt();
-
 			output_env();
-		
+			ENV->bat_voltage = Get_battery_volt();
 	}	
 }
 
 int main(void)
 {
 	main_Init();
-	command_init();
+	command_buff_reset();
 	nvic_init();		//=====初始化中断模式
 	clock_Init();		//=====初始化软时钟
 	usart_Init();		//=====初始化串口
