@@ -74,7 +74,7 @@ static void run_self_test(void)
     accel[1] *= accel_sens;
     accel[2] *= accel_sens;
     dmp_set_accel_bias(accel);
-		printf("setting bias succesfully ......\r\n");
+		LOG_D("setting bias succesfully ......\r\n");
     }
 }
 
@@ -188,31 +188,31 @@ void DMP_Init(void)
 	MPU6050_initialize();
 	u8 temp[1]={0};
   i2c_read(0x68,0x75,1,temp);
-	printf("MPU6050_initialize complete ......\r\n");
+	LOG_D("MPU6050_initialize complete ......\r\n");
 	if(temp[0]!=0x68)
 		NVIC_SystemReset();
 	if(!mpu_init()) {
 		if(!mpu_set_sensors(INV_XYZ_GYRO | INV_XYZ_ACCEL))
-			printf("mpu_set_sensor complete ......\r\n");
+			LOG_D("mpu_set_sensor complete ......\r\n");
 	  if(!mpu_configure_fifo(INV_XYZ_GYRO | INV_XYZ_ACCEL))
-			printf("mpu_configure_fifo complete ......\r\n");
+			LOG_D("mpu_configure_fifo complete ......\r\n");
 	  if(!mpu_set_sample_rate(DEFAULT_MPU_HZ))
-			printf("mpu_set_sample_rate complete ......\r\n");
+			LOG_D("mpu_set_sample_rate complete ......\r\n");
 	  if(!dmp_load_motion_driver_firmware())
-	  	printf("dmp_load_motion_driver_firmware complete ......\r\n");
+	  	LOG_D("dmp_load_motion_driver_firmware complete ......\r\n");
 	  if(!dmp_set_orientation(inv_orientation_matrix_to_scalar(gyro_orientation)))
-			printf("dmp_set_orientation complete ......\r\n");
+			LOG_D("dmp_set_orientation complete ......\r\n");
 	  if(!dmp_enable_feature(DMP_FEATURE_6X_LP_QUAT | DMP_FEATURE_TAP |
 				DMP_FEATURE_ANDROID_ORIENT | DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_SEND_CAL_GYRO |
 				DMP_FEATURE_GYRO_CAL))
-			printf("dmp_enable_feature complete ......\r\n");
+			LOG_D("dmp_enable_feature complete ......\r\n");
 	  if(!dmp_set_fifo_rate(DEFAULT_MPU_HZ))
-			printf("dmp_set_fifo_rate complete ......\r\n");
+			LOG_D("dmp_set_fifo_rate complete ......\r\n");
 	  run_self_test();
 	  if(!mpu_set_dmp_state(1))
-			printf("mpu_set_dmp_state complete ......\r\n");
+			LOG_D("mpu_set_dmp_state complete ......\r\n");
   }
-	printf("DMP_Init complete ......\r\n");
+	LOG_D("DMP_Init complete ......\r\n");
 }
 
 /**************************************************************************
@@ -234,7 +234,7 @@ int Read_DMP(float* Pitch, float* Gyro_Y, float* Gyro_Z)
 	do{
 		dmp_ret = dmp_read_fifo(gyro, accel, quat, &sensor_timestamp, &sensors, &more);
 	}while(more);
-	//printf("sensors %u , more %u \r\n", sensors, more);
+	//LOG_D("sensors %u , more %u \r\n", sensors, more);
 	if(dmp_ret)
 		return -1;
 	if(!((sensors & INV_WXYZ_QUAT) && (sensors& INV_XYZ_GYRO) && (sensors & INV_XYZ_ACCEL)))

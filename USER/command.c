@@ -87,6 +87,9 @@ int cmd_proc(unsigned char * buff)
 
 void command_proc(unsigned char data,char channel)
 {	
+	if(channel != 3)										// 只从usart3接受命令，忽略usart1的数据
+		return;
+	
 	cmd_setbusy();											// 防止同级别中断打断导致丢数据
 	
 	usart_buff_p->index += 1;

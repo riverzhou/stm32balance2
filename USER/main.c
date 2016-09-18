@@ -20,7 +20,7 @@ struct env_t *ENV = &g_env;
 #ifdef USE_FULL_ASSERT
 void assert_failed(uint8_t* file, uint32_t line)
 {
-	printf("Wrong parameters value: file %s on line %d\r\n", file, line);
+	LOG_D("Wrong parameters value: file %s on line %d\r\n", file, line);
 	while(1) __NOP();
 }
 #endif
@@ -102,7 +102,7 @@ int main(void)
 	control_Init();	//=====初始化控制中断，5ms
 	LED_Init();			//=====初始化LED
 
-	printf("hello world \r\n");
+	LOG_D("hello world \r\n");
 
 	while(1)
 		second();
