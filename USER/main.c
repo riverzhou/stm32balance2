@@ -90,7 +90,8 @@ int main(void)
 	command_buff_reset();
 	nvic_init();		//=====初始化中断模式
 	clock_Init();		//=====初始化软时钟
-	usart_Init();		//=====初始化串口
+	usart1_Init();	//=====初始化串口1
+	usart3_Init();	//=====初始化串口3
 	Battery_Init();	//=====初始电池电压监控
 	Encoder_Init();	//=====初始化电机编码器接口
 	Motor_Init();		//=====初始化驱动电机

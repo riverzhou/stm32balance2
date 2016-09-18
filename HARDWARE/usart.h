@@ -2,8 +2,8 @@
 #define _USART_H_
 
 
-//#define USE_USART1
-#define USE_USART3
+#define USE_USART1
+//#define USE_USART3
 
 #ifdef 	USE_USART3
 #define	usart_Init()			usart3_Init()

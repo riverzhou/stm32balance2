@@ -14,7 +14,7 @@
 void USART1_IRQHandler(void)
 {	
 	if(USART_GetITStatus(USART1, USART_IT_RXNE) != RESET){			//接收到数据
-		command_proc(USART_ReceiveData(USART1));
+		//command_proc(USART_ReceiveData(USART1));
 	}  
 } 
 
