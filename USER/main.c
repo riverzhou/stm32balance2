@@ -12,6 +12,7 @@
 #include "led.h"
 #include "main.h"
 #include "command.h"
+#include "log.h"
 
 struct env_t g_env;
 struct env_t *ENV = &g_env;
@@ -71,7 +72,7 @@ void output_env(void)
 	buff_p->sum = sum;
 	
 	for(int i=0;i<sizeof(struct env_buff_t);i++)
-		usart_PutChar(buff[i]);
+		usart3_PutChar(buff[i]);
 }
 
 void second(void)
@@ -80,6 +81,7 @@ void second(void)
 	if(SYS_ClockTick >= count){
 			count += 1000;
 			output_env();
+			LOG_D("SYS_ClockTick %u\r\n",SYS_ClockTick);
 			ENV->bat_voltage = Get_battery_volt();
 	}	
 }
