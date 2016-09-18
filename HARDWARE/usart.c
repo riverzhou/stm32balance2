@@ -14,7 +14,7 @@
 void USART1_IRQHandler(void)
 {	
 	if(USART_GetITStatus(USART1, USART_IT_RXNE) != RESET){			//接收到数据
-		//command_proc(USART_ReceiveData(USART1));
+		command_proc(USART_ReceiveData(USART1),1);
 	}  
 } 
 
@@ -63,8 +63,8 @@ void usart1_Init(void)
 	//Usart1 NVIC 配置
 	memset(&NVIC_InitStructure,0,sizeof(NVIC_InitStructure));
   NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 3;	//抢占优先级3
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;				//子优先级0
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2;	//抢占优先级2
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 2;				//子优先级2
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;						//IRQ通道使能
 	NVIC_Init(&NVIC_InitStructure);														//根据指定的参数初始化VIC寄存器
 
@@ -96,7 +96,7 @@ int usart1_GetChar (void) {
 void USART3_IRQHandler(void)
 {	
 	if(USART_GetITStatus(USART3, USART_IT_RXNE) != RESET){			//接收到数据
-		command_proc(USART_ReceiveData(USART3));
+		command_proc(USART_ReceiveData(USART3),3);
 	}  
 } 
 

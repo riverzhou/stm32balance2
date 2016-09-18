@@ -41,12 +41,12 @@ void main_Init(void)
 /*
 SysTick_IRQn	0:0
 EXTI9_5_IRQn	2:1
-USART1_IRQn		3:0
+USART1_IRQn		2:2
 USART3_IRQn		2:0
 */
 void nvic_init(void)
 {
-	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_3); // 配置中断模式为3:1 (0-7:0-1)
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2); // 配置中断模式为3:1 (0-3:0-3)
 }
 
 void output_env(void)

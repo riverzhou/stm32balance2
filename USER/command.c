@@ -85,7 +85,7 @@ int cmd_proc(unsigned char * buff)
 	return 0;
 }
 
-void command_proc(unsigned char data)
+void command_proc(unsigned char data,char channel)
 {	
 	cmd_setbusy();											// 防止同级别中断打断导致丢数据
 	
