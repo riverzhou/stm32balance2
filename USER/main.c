@@ -80,8 +80,8 @@ void second(void)
 	static volatile unsigned int count = 0;
 	if(SYS_ClockTick >= count){
 			count += 1000;
-			output_env();
 			LOG_D("SYS_ClockTick %u\r\n",SYS_ClockTick);
+			output_env();
 			ENV->bat_voltage = Get_battery_volt();
 	}	
 }
