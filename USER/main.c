@@ -46,7 +46,7 @@ USART3_IRQn		2:0
 */
 void nvic_init(void)
 {
-	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2); // 配置中断模式为3:1 (0-3:0-3)
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2); // 配置中断模式为2:2 (0-3:0-3)
 }
 
 void output_env(void)
