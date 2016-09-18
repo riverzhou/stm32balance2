@@ -5,6 +5,7 @@
 #include "dmpKey.h"
 #include "dmpmap.h"
 #include "MPU6050.h"
+#include "log.h"
 
 #include "ioi2c.h"
 
