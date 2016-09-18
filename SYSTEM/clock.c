@@ -6,9 +6,11 @@
 */
 
 volatile unsigned int SYS_ClockTick = 0;
+volatile int SYS_ClockDelay = 0;
 
 void SysTick_Handler(void) {
 	SYS_ClockTick++;
+	SYS_ClockDelay--;
 }
 
 void clock_Init(void)
@@ -16,7 +18,6 @@ void clock_Init(void)
 	SysTick_Config(SystemCoreClock/1000);   			// SysTick 1 msec interrupts
 	NVIC_SetPriority (SysTick_IRQn, 0);					// 把时钟优先级设到最高
 }
-
 
 //延时nus
 //nus为要延时的us数.		    								   

@@ -1,12 +1,25 @@
 #include <stdio.h>
 #include <string.h>
 #include "stm32f10x.h"
+#include "clock.h"
 #include "command.h"
 #include "main.h"
 #include "log.h"
 
 struct usart_buff_t  usart_buff;
 struct usart_buff_t* usart_buff_p = &usart_buff;
+
+#define CMD_TIMEOUT	50		// 50ms无数据则允许其他同级别中断打断
+
+void cmd_setbusy(void)
+{
+		SYS_ClockDelay = CMD_TIMEOUT;
+}
+
+int cmd_isbusy(void)
+{
+	return (SYS_ClockDelay>0);
+}
 
 /*
 struct cmd_t{
@@ -74,6 +87,8 @@ int cmd_proc(unsigned char * buff)
 
 void command_proc(unsigned char data)
 {	
+	cmd_setbusy();											// 防止同级别中断打断导致丢数据
+	
 	usart_buff_p->index += 1;
 	usart_buff_p->index %= CMDLEN;
 	usart_buff_p->buff[usart_buff_p->index] = data;

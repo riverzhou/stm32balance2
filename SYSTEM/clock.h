@@ -8,5 +8,6 @@ void delay_us(unsigned int nus);
 unsigned int get_ms(unsigned long *count);
 
 extern volatile unsigned int SYS_ClockTick;
+extern volatile int SYS_ClockDelay;
 
 #endif

@@ -40,9 +40,9 @@ void main_Init(void)
 
 /*
 SysTick_IRQn	0:0
-EXTI9_5_IRQn	2:0
+EXTI9_5_IRQn	2:1
 USART1_IRQn		3:0
-USART3_IRQn		4:0
+USART3_IRQn		2:0
 */
 void nvic_init(void)
 {
