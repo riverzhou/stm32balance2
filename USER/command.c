@@ -3,6 +3,7 @@
 #include "stm32f10x.h"
 #include "command.h"
 #include "main.h"
+#include "log.h"
 
 struct usart_buff_t  usart_buff;
 struct usart_buff_t* usart_buff_p = &usart_buff;
@@ -77,6 +78,9 @@ void command_proc(unsigned char data)
 	usart_buff_p->index %= CMDLEN;
 	usart_buff_p->buff[usart_buff_p->index] = data;
 	usart_buff_p->buff[usart_buff_p->index+CMDLEN] = data;
+	
+	LOG_D("%.2X ",data);
+	
 	cmd_proc(&(usart_buff_p->buff[usart_buff_p->index+1]));
 } 
 
