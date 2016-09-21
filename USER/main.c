@@ -31,7 +31,7 @@ void main_Init(void)
 
 	ENV->env_lock			= 0;				// 全局变量锁
 	ENV->bal_angle		= 0;				// 平衡中值 	// 放大1000倍
-	ENV->bal_kp				= 300;			// 平衡KP
+	ENV->bal_kp				= 18000;		// 平衡KP
 	ENV->bal_kd				= 1000;			// 平衡KD  		// 放大1000倍
 	ENV->vel_kp				= 80;				// 速度KP
 	ENV->vel_ki				= 400;			// 速度KI			// 放大1000倍
@@ -79,7 +79,7 @@ void second(void)
 {
 	static volatile unsigned int count = 0;
 	if(SYS_ClockTick >= count){
-			count += 1000;
+			count += 100;
 			LOG_D("SYS_ClockTick %u\r\n",SYS_ClockTick);
 			output_env();
 			ENV->bat_voltage = Get_battery_volt();

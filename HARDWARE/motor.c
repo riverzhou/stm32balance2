@@ -2,7 +2,7 @@
 #include "motor.h"
 #include "ioi2c.h"
 
-#define MAX_ANGEL			40				// 40度
+#define MAX_ANGEL			50				// 50度
 #define MIN_VOLTAGE		1110			// 11.1V
 
 void Motor_Init(void)

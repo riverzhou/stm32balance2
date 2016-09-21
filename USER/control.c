@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 #include "stm32f10x.h"
 #include "control.h"
 #include "MPU6050.h"
@@ -11,6 +12,9 @@
 #include "clock.h"
 #include "main.h"
 #include "command.h"
+
+#define ZERO_LIMIT		1.0E-19
+#define PI         		3.1415926535897932
 
 #define BAL_VOLTAGE		ENV->bat_voltage
 
@@ -89,10 +93,13 @@ void Get_Angle(float* Bal_Angle, float* Bal_Gyro, float* Turn_Gyro)
 **************************************************************************/
 int balance(float Angle, float Gyro)
 { 
-	float BAL_ANGLE = (float)ENV->bal_angle/1000;
+	float BAL_ANGLE = (Angle - (float)ENV->bal_angle/1000)*PI/180;
 	float BAL_KP		=	(float)ENV->bal_kp;
 	float BAL_KD		= (float)ENV->bal_kd/1000;
-	return (Angle - BAL_ANGLE) * BAL_KP + Gyro * BAL_KD;
+	float sin_angle = sin(BAL_ANGLE);
+	float cos_angle = cos(BAL_ANGLE);
+	if(cos_angle < ZERO_LIMIT) cos_angle = ZERO_LIMIT;
+	return (BAL_KP * sin_angle + Gyro * BAL_KD / cos_angle) / cos_angle;
   //===求出平衡的角度中值 和机械相关
 	//===计算平衡控制的电机PWM  PD控制
 }
