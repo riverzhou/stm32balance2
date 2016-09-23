@@ -12,9 +12,11 @@
 #include "clock.h"
 #include "main.h"
 #include "command.h"
+#include "log.h"
 
 #define ZERO_LIMIT		1.0E-19
 #define PI         		3.1415926535897932
+#define dTIME 				0.005						// 5ms , 200Hz
 
 #define BAL_VOLTAGE		ENV->bat_voltage
 
@@ -65,6 +67,7 @@ void control_Init(void)
 	NVIC_Init(&NVIC_InitStructure); 	
 }
 
+
 /**************************************************************************
 函数功能：获取平衡角度和平衡角速度和转向角速度
 入口参数：衡角度和平衡角速度和转向角速度
@@ -72,12 +75,16 @@ void control_Init(void)
 **************************************************************************/
 void Get_Angle(float* Bal_Angle, float* Bal_Gyro, float* Turn_Gyro)
 { 
+	static float last_Pitch = 0;
 	float Pitch, Gyro_Y, Gyro_Z;
 
 	if(!Read_DMP(&Pitch, &Gyro_Y, &Gyro_Z)){
 		*Bal_Angle = Pitch;
-		*Bal_Gyro  = Gyro_Y;
+		//*Bal_Gyro  = Gyro_Y;
+		*Bal_Gyro  = (Pitch - last_Pitch)/dTIME;
+		last_Pitch = Pitch;
 		*Turn_Gyro = Gyro_Z;
+		//LOG_D("%-8.8f : %-8.8f \r\n",*Bal_Gyro,Gyro_Y/16.384);
 	}
 	else{
 		*Bal_Angle = 0;

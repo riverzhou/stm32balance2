@@ -32,7 +32,7 @@ void main_Init(void)
 	ENV->env_lock			= 0;				// 全局变量锁
 	ENV->bal_angle		= 0;				// 平衡中值 	// 放大1000倍
 	ENV->bal_kp				= 18000;		// 平衡KP
-	ENV->bal_kd				= 1000;			// 平衡KD  		// 放大1000倍
+	ENV->bal_kd				= 16000;		// 平衡KD  		// 放大1000倍
 	ENV->vel_kp				= 80;				// 速度KP
 	ENV->vel_ki				= 400;			// 速度KI			// 放大1000倍
 	ENV->enc_filte		= 800;			// 编码滤波		// 放大1000倍

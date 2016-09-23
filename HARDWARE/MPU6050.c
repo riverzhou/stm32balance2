@@ -170,8 +170,8 @@ void MPU6050_setI2CBypassEnabled(uint8_t enabled) {
 *******************************************************************************/
 void MPU6050_initialize(void) {
 	MPU6050_setClockSource(MPU6050_CLOCK_PLL_YGYRO);    		//设置时钟
-  MPU6050_setFullScaleGyroRange(MPU6050_GYRO_FS_250); 		//陀螺仪最大量程 +-250度每秒
-	//MPU6050_setFullScaleGyroRange(MPU6050_GYRO_FS_2000);	//陀螺仪最大量程 +-2000度每秒
+  //MPU6050_setFullScaleGyroRange(MPU6050_GYRO_FS_250); 		//陀螺仪最大量程 +-250度每秒
+	MPU6050_setFullScaleGyroRange(MPU6050_GYRO_FS_2000);	//陀螺仪最大量程 +-2000度每秒
   MPU6050_setFullScaleAccelRange(MPU6050_ACCEL_FS_2);			//加速度度最大量程 +-2G
   MPU6050_setSleepEnabled(0); 														//进入工作状态
 	MPU6050_setI2CMasterModeEnabled(0);	 										//不让MPU6050 控制AUXI2C
